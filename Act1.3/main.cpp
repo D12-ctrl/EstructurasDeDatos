@@ -3,8 +3,9 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <iterator>
 
-#include "person.hpp"
+#include "person.cpp"
 
 using namespace std;
 
@@ -34,16 +35,19 @@ auto readCSV(string filename)
             string oName;
             string dPort;
             string dIP;
-
+            string dName;
+/*Fecha, Hora, IP Origen, Puerto Origen, Nombre Origen, IP Destino, Puerto Destino, Nombre Destino*/
         getline(ss, date, ',');
         getline(ss, hour, ',');
         getline(ss, oIP, ',');
         getline(ss, oPort, ',');
         getline(ss, oName, ',');
-        getline(ss, dPort, ',');
         getline(ss, dIP, ',');
+        getline(ss, dPort, ',');
+        getline(ss, dName);
 
-        lines.push_back(Persona(date, hour, oIP, oPort, oName, dPort, dIP));
+        Persona pers = Persona(date, hour, oIP, oPort, oName, dIP, dPort, dName);
+        lines.push_back(pers);
     }
 
     file.close();
@@ -53,7 +57,14 @@ auto readCSV(string filename)
 
 int main()
 {   
-    readCSV("equipo14.csv");
+    vector <Persona> personas = readCSV("equipo14.csv");
 
-    
+    //Imprimir el vector
+
+        //copy(personas.begin(), personas.end(), ostream_iterator<Persona>(cout));
+
+        //cout << personas.size();
+
+
+    return 0;
 }
