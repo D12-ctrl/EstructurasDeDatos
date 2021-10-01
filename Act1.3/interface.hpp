@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "person.hpp"
+#include "person.cpp"
 
 using namespace std;
 
@@ -21,9 +21,9 @@ class Interface
         vector<Persona> recordsxNombre(string);
         vector<Persona> recordsxCorreo(string);
         vector<Persona> recordsxPuerto(int);
-        unsigned long size();
-        void ordenar(vector<Persona>(*)(vector<Persona>, bool(*)(Persona, Persona)),
-        bool(*)(Persona, Persona));
+        string IP();
+        int size();
+        void order(vector<Persona>(*)(vector<Persona>, bool(*)(Persona, Persona)), bool(*)(Persona, Persona));
 
 
 };

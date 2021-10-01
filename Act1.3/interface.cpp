@@ -4,8 +4,13 @@ Interface::~Interface()
 {
     logs.clear();
 }
+string Interface::IP()
+{   
+    Persona a;
+    return a.OriginIP();
+}
 
-unsigned long Interface::size()
+int Interface::size()
 {
     return logs.size();
 }
@@ -14,7 +19,7 @@ std::vector<Persona> Interface::compara(Persona buscar, bool(comparador)(Persona
 {
     int i = 0;
     
-    std::vector<Persona> find;
+    vector<Persona> find;
     
     long int size = logs.size();
     
@@ -29,10 +34,8 @@ std::vector<Persona> Interface::compara(Persona buscar, bool(comparador)(Persona
 }
 
 vector<Persona> Interface::recordsxDia(string days)
-{
+{   days = "12/08/2020";
     Persona search;
-    days = "12";
-
     search.Day() = days;
 
     return compara(search, Persona::comparaDia);
@@ -55,8 +58,15 @@ vector<Persona> Interface::recordsxPuerto(int port)
 vector<Persona> Interface::recordsxCorreo(string mail)
 {
     Persona search;
-    search.destinationName() = mail;
+
+    search.DestinationName() = mail;
 
     return compara(search, Persona::comparaMail);
-
 }
+
+/*void Interface::ordenar(
+                         std::vector<Persona>(* algoritmo)(std::vector<Libro>, bool(*)(Libro,Libro)),
+                         bool(* compara)(Libro,Libro)=
+{
+    logs = algoritmo(logs, compara)
+}*/
