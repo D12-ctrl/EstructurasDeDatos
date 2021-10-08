@@ -14,7 +14,10 @@ class LinkedList
 
     public:
         LinkedList() {}
+        virtual ~LinkedList();
 
+        //Regresa el primer elemento de la lista
+        Element<T>* firstElement();
         //Checar si la lista esta vacia
         bool emptyList();
         //Añadir un nuevo elemento a la lista
@@ -37,6 +40,17 @@ class LinkedList
 
         ~LinkedList();
 };
+
+template <class T>
+Element<T>* LinkedList<T>::firstElement()
+{
+    return firstElmnt;
+}
+template <class T>
+LinkedList<T>::~LinkedList()
+{
+    this->clear();
+}
 template <class T>
 bool LinkedList<T>::emptyList()
 {
@@ -187,12 +201,7 @@ LinkedList<T>* LinkedList<T>::Intersection(LinkedList<T>* B)
         temp = temp->getNextElement();
         
     }
-    case 8:
-    {
-        cout << "Adios" << endl;
-        break;
-    }
-
+    
     return list;
 }
 
