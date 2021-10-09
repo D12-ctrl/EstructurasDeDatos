@@ -26,14 +26,19 @@ class Element
         Element(const T & info): information(info){}
 
             //Destructor
-        //virtual ~Element();
+        virtual ~Element(){this->clear;}
 
             //Setter and getters
         Element<T>* getNextElement() const {return next;}
         void setNextElement(Element<T>* elemnt){next = elemnt;}
         void print(){cout << information << endl;}
         T getInfo() const{return information;}
-
+        void Clear();
 
 };
 
+template <class T>
+void Element<T>::Clear()
+{
+    ~Element();
+}
