@@ -33,6 +33,7 @@ class Element
         void setNextElement(Element<T>* elemnt){next = elemnt;}
         void print(){cout << information << endl;}
         T getInfo() const{return information;}
+        /*Eliminar un elemento*/
         void Clear();
 
 };
