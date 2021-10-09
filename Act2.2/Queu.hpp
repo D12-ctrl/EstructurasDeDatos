@@ -45,7 +45,6 @@ class Queu : private LinkedList<T>
 
         //Metodos heredados
         using LinkedList<T>::Count();
-        using LinkedList<T>::firstElement();
         using LinkedList<T>::emptyList();
 
 };
