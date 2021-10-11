@@ -1,9 +1,12 @@
 /*
+ITESM
+
     Element.hpp
     Actividad 2.1
 
+
     Diego Mellado Oliveros
-    Eduardo Gaona 
+    Eduardo Gaona Romero
 */
 
 #include <iostream>
@@ -16,6 +19,7 @@ using namespace std;
 template <class T>
 class Element
 {
+
     protected:
         T information;
         Element<T>* next = nullptr;
