@@ -19,21 +19,31 @@ using namespace std;
 template <class T>
 class Element
 {
-protected:
-    T information;
-    Element<T> *next = nullptr;
 
-public:
-    //Constructores
-    Element() {}
-    Element(const T &info) : information(info) {}
+    protected:
+        T information;
+        Element<T>* next = nullptr;
 
-    //Destructor
-    //virtual ~Element();
+    public:
+            //Constructores
+        Element(){}
+        Element(const T & info): information(info){}
 
-    //Setter and getters
-    Element<T> *getNextElement() const { return next; }
-    void setNextElement(Element<T> *elemnt) { next = elemnt; }
-    void print() { cout << information << endl; }
-    T getInfo() const { return information; }
+            //Destructor
+        virtual ~Element(){this->clear;}
+
+            //Setter and getters
+        Element<T>* getNextElement() const {return next;}
+        void setNextElement(Element<T>* elemnt){next = elemnt;}
+        void print(){cout << information << endl;}
+        T getInfo() const{return information;}
+        /*Eliminar un elemento*/
+        void Clear();
+
 };
+
+template <class T>
+void Element<T>::Clear()
+{
+    ~Element();
+}

@@ -13,33 +13,49 @@ template <class T>
 class LinkedList
 {
     //Primer elemento de la lista
-    Element<T> *firstElmnt = nullptr;
 
-public:
-    LinkedList() {}
+    Element<T>* firstElmnt = nullptr;
 
-    //Checar si la lista esta vacia
-    bool emptyList();
-    //Añadir un nuevo elemento a la lista
-    void addSorted(Element<T> *);
-    //Contar los elementos de la lista
-    int Count();
-    // Crear una sublista de un rango
-    LinkedList<T> *Sublist(int, int);
-    // Borrar un rango de elementos
-    void DeleteRange(int, int);
-    // Unir dos listas
-    LinkedList<T> *Union(LinkedList<T> *);
-    // Elementos que se encuentran en ambas listas
-    LinkedList<T> *Intersection(LinkedList<T> *);
-    // Elementos presentes en la lista A pero no en la B
-    LinkedList<T> *Except(LinkedList<T> *);
-    //Imprimir elementos
-    void PrintElements();
-    //friend ostream & operator<<(ostream & os, const LinkedList<T> & Element);
+    public:
+        LinkedList() {}
+        virtual ~LinkedList();
 
-    ~LinkedList();
+        //Regresa el primer elemento de la lista
+        Element<T>* firstElement();
+        //Checar si la lista esta vacia
+        bool emptyList();
+        //Añadir un nuevo elemento a la lista
+        void addSorted(Element<T>*);
+        //Contar los elementos de la lista
+        int Count();
+        // Crear una sublista de un rango
+        LinkedList<T>*Sublist(int, int);       
+        // Borrar un rango de elementos
+        void DeleteRange(int, int); 
+        // Unir dos listas
+        LinkedList<T>*Union(LinkedList<T>*); 
+        // Elementos que se encuentran en ambas listas
+        LinkedList<T>*Intersection(LinkedList<T>*); 
+        // Elementos presentes en la lista A pero no en la B
+        LinkedList<T>*Except(LinkedList<T>*); 
+        //Imprimir elementos
+        void PrintElements();
+        //friend ostream & operator<<(ostream & os, const LinkedList<T> & Element);
+
+        ~LinkedList();
+
 };
+
+template <class T>
+Element<T>* LinkedList<T>::firstElement()
+{
+    return firstElmnt;
+}
+template <class T>
+LinkedList<T>::~LinkedList()
+{
+    this->clear();
+}
 template <class T>
 bool LinkedList<T>::emptyList()
 {
@@ -183,12 +199,16 @@ LinkedList<T> *LinkedList<T>::Intersection(LinkedList<T> *B)
         firs = firs->getNextElement();
         temp = firstElmnt;
         temp = temp->getNextElement();
+
+        
+
     }
 case 8:
 {
     cout << "Adios" << endl;
     break;
 }
+
 
     return list;
 }
