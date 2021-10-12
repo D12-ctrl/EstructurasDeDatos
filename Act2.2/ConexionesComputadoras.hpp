@@ -9,7 +9,12 @@
 #include <iostream>
 #include "Queu.hpp"
 #include "Stack.hpp"
-
+//temporal
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h> /* srand, rand */
+#include <time.h>   /* time */
+#include <string.h>
 using namespace std;
 
 template <class T>
