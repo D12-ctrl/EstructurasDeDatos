@@ -257,19 +257,3 @@ void LinkedList<T>::PrintElements()
         temp = temp->getNextElement();
     }
 }
-
-//Preg 4 generar IP
-void GenIP()
-{
-    int randNum;
-
-    /* Inicializamos random seed: */
-    srand(time(NULL));
-
-    /* Generamos un número aleatorio entre 1 y 150 */
-    randNum = rand() % 150 + 1;
-
-    cout << "Su dirección IP es la siguiente: " << endl;
-
-    cout << "172.17.248." << randNum << endl;
-}
