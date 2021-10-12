@@ -41,8 +41,10 @@ public:
     void addConexionesS(const T &);
     /*Elementos semejantes*/
     void ReadInOut(const T &);
+    /* Responder*/
+    void Response(const T);
 };
-
+//Global
 string ipRand = "";
 
 string GenIP()
@@ -69,7 +71,8 @@ string GenIP()
     // While para comparar los registros
     return ipRand;
 }
-
+//Global
+int LenIn = 0;
 template <class T>
 void Conexiones<T>::addConexionesE(const T &value)
 {
@@ -82,9 +85,11 @@ void Conexiones<T>::addConexionesE(const T &value)
     {
         Element<T> ip = new Element<T>(value);
         conexionesSimEntrada->insert(value);
+        LenIn = LenIn + 1;
     }
 }
-
+//Global
+int LenOut = 0;
 template <class T>
 void Conexiones<T>::addConexionesS(const T &value)
 {
@@ -97,5 +102,27 @@ void Conexiones<T>::addConexionesS(const T &value)
     {
         Element<T> ip = new Element<T>(value);
         conexionesSimSalida->insert(value);
+        LenOut = LenOut + 1;
+    }
+}
+template <class T>
+void Conexiones<T>::Response(const T)
+{
+    cout << "Pregunta a responder: " << endl;
+    cout << " [ 1 ] ¿Cuántas conexiones entrantes tiene esta computadora?" << endl;
+    cout << " [ 2 ] ¿Cuántas conexiones salientes tiene esta computadora?" << endl;
+    cin << T;
+
+    switch (T)
+    {
+    case 1:
+        cout << "¿Cuántas conexiones entrantes tiene esta computadora?" << endl;
+        cout << LenIn << endl;
+        break;
+    case 2:
+        cout << "¿Cuántas conexiones salientes tiene esta computadora?" << endl;
+        cout << LenOut << endl;
+    default:
+        break;
     }
 }
