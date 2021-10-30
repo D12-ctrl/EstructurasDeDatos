@@ -2,7 +2,7 @@
 
 Arbol binario
 
-Act 3.1
+Act 3.2
 
 */
 
