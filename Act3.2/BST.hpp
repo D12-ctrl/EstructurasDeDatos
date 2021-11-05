@@ -7,19 +7,15 @@ BST
 
 #include <iostream>
 #include "binaryTree.hpp"
+#include <set>
+#include <vector>
+#include <map>
 
 using namespace std;
 
-template <class T>
-class BST : public BinaryTree<T>
+
+class BST //: public BinaryTree<T>
 {
-    public:
-    BST(){}
-    virtual ~BST(){}
-
-    
-
-
-
+     
 };
 

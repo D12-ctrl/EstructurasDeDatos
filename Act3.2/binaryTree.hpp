@@ -2,7 +2,7 @@
 
 Arbol binario
 
-Act 3.2
+Act 3.1
 
 */
 
@@ -15,9 +15,9 @@ class BinaryTree
 {
     protected:
         /*Elemento raíz*/
-        elementTree * root = nullptr;
+        elementTree<T> * root = nullptr;
 
-        void clear(elementTree*);
+        void clear(elementTree<T>*);
         int height = 0;
 
     public:
@@ -28,8 +28,8 @@ class BinaryTree
         int getHeight(){return height;}
 
         /*Insertar un nodo en el arbol*/
-        bool insert(T&, elementTree*);
-        bool insert(elementTree*, elementTree*);
+        bool insert(T&, elementTree<T>*);
+        bool insert(elementTree<T>*, elementTree<T>*);
 
         /*Revisa si el arbol esta vacio*/
         bool empty();
@@ -39,16 +39,16 @@ class BinaryTree
 
         /*Recorridos del arbol*/
         void preOrden() const;
-        void preOrden(elementTree*) const;
+        void preOrden(elementTree<T>*) const;
 
         void inOrden() const;
-        void inOrden(elementTree*) const;
+        void inOrden(elementTree<T>*) const;
 
         void postOrden() const;
-        void postOrden(elementTree *) const;
+        void postOrden(elementTree<T> *) const;
 
         void level();
-        void level(elementTree*);
+        void level(elementTree<T>*);
 
 };
 
@@ -60,7 +60,7 @@ void BinaryTree<T>::clear()
 }
 
 template <class T>
-void BinaryTree<T>::clear(elementTree * node)
+void BinaryTree<T>::clear(elementTree<T> * node)
 {
     if (node != nullptr)
     {
@@ -84,13 +84,13 @@ bool BinaryTree<T>::empty()
 }
 
 template <class T>
-bool BinaryTree<T>::insert(T & value, elementTree * parent)
+bool BinaryTree<T>::insert(T & value, elementTree<T> * parent)
 {
-    return this->insert(new elementTree(value), parent);
+    return this->insert(new elementTree<T>(value), parent);
 }
 
 template <class T>
-bool BinaryTree<T>::insert(elementTree * node, elementTree * parent)
+bool BinaryTree<T>::insert(elementTree<T> * node, elementTree<T> * parent)
 {
     bool inserted = false;
 
@@ -139,7 +139,7 @@ void BinaryTree<T>::preOrden()const
     }
 
 template <class T>
-void BinaryTree<T>::preOrden(elementTree * node)const
+void BinaryTree<T>::preOrden(elementTree<T> * node)const
     {
         if(node != nullptr)
         {
@@ -160,7 +160,7 @@ void BinaryTree<T>::inOrden() const
     }
 
 template <class T>
-void BinaryTree<T>::inOrden(elementTree* node) const
+void BinaryTree<T>::inOrden(elementTree<T> * node) const
     {
         if(node != nullptr)
         {
@@ -180,7 +180,7 @@ void BinaryTree<T>::postOrden() const
     }
 
 template <class T>
-void BinaryTree<T>::postOrden(elementTree* node) const
+void BinaryTree<T>::postOrden(elementTree<T>* node) const
     {
         if(node != nullptr)
         {
@@ -204,7 +204,7 @@ void BinaryTree<T>::level()
 }
 
 template <class T>
-void BinaryTree<T>::level(elementTree* node)
+void BinaryTree<T>::level(elementTree<T>* node)
 {
     std::queue<elementTree<T> * > q;
 
