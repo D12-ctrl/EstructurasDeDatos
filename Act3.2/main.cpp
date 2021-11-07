@@ -125,8 +125,27 @@ auto conexionesComputadoras(string date, vector<Register> registros)
     {
         cout << "Domain: " << m.first << ", No. : " << m.second << endl;
     }
+    
+    top(logs, date, 5);
 }
 
+auto top(vector <Register*> conexiones, string date, int n)
+{   
+    /*Crear un nuevo BST*/
+    BST<string> *  bst = new BST<string>;
+    elementTree<string> * root = new elementTree<string>(date);
+
+    /*Recorrido del vector*/
+    for(auto r : conexiones)
+    {
+        string conection  = r->getDestination();
+        elementTree<string> * uno = new elementTree<string>(conection);
+        bst->insert(uno);
+
+    }
+
+
+}
 int main()
 {
     /*Leer archivo csv*/
