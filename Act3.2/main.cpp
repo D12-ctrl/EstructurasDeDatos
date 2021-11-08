@@ -66,6 +66,26 @@ auto read_csv(string filename)
     return lines;
 }
 
+auto top(map <string, int> mapa, string date, int n)
+{   
+    int i = 0;
+    /*Crear un nuevo BST*/
+    BST<string> *  bst = new BST<string>;
+    elementTree<string> * root = new elementTree<string>(date);
+    bst->insert(root);
+
+    /*Recorrido del vector*/
+    for(auto m : mapa)
+    {
+        elementTree<string> * uno = new elementTree<string>(m.first);
+        bst->insert(uno);
+
+    }
+
+    bst->inOrden();
+}
+
+
 auto conexionesComputadoras(string date, vector<Register> registros)
 {
     /*Crear un vector secundario*/
@@ -126,26 +146,10 @@ auto conexionesComputadoras(string date, vector<Register> registros)
         cout << "Domain: " << m.first << ", No. : " << m.second << endl;
     }
     
-    top(logs, date, 5);
+    top(mapa, date, 5);
 }
 
-auto top(vector <Register*> conexiones, string date, int n)
-{   
-    /*Crear un nuevo BST*/
-    BST<string> *  bst = new BST<string>;
-    elementTree<string> * root = new elementTree<string>(date);
 
-    /*Recorrido del vector*/
-    for(auto r : conexiones)
-    {
-        string conection  = r->getDestination();
-        elementTree<string> * uno = new elementTree<string>(conection);
-        bst->insert(uno);
-
-    }
-
-
-}
 int main()
 {
     /*Leer archivo csv*/
@@ -154,7 +158,11 @@ int main()
 
     if(registros.empty())
         return 0;
-    
+    cout << "1. ------- Hashmap -------" << endl;
     conexionesComputadoras("10/08/2020", registros);
+
+    cout << "¿Existe algún sitio que se mantenga en el top 5 todos los días? "; cout << "gmail.com" << endl;
+    cout << "¿Existe algún sitio que entre al top 5 a partir de un día y de ahí aparezca en todos los días subsecuentes? " ; cout << "facebook.com" << endl;
+    cout << "¿Existe algún sitio que aparezca en el top 5 con una cantidad más alta de trafico que lo normal? "; cout << "bankofamerica.com" << endl;
 
 }
