@@ -143,7 +143,7 @@ auto conexionesComputadoras(string date, vector<Register> registros)
     /*Imprimir el hash map*/
     for(auto m : mapa)
     {
-        cout << "Domain: " << m.first << ", No. : " << m.second << endl;
+        cout << "Domain: " << m.first << endl;
     }
     
     top(mapa, date, 5);
