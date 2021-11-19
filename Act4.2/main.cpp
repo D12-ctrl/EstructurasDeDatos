@@ -12,6 +12,7 @@ Diego Mellado Oliveros
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <set>
 
 #include "Registros.hpp"
 #include "Graph.hpp"
@@ -102,9 +103,60 @@ auto websites(vector<Register> registros)
 }
 
 auto grafoRedInter(vector<Register> internalIPdata)
-{
+{   int counter;
+    int i = 0;
+    /*Estructura stl no añade datos repetidos*/
+    set<string> dates;
+
+    /*Crear un grafo nuevo*/
+    Graph<string, int> * redInterna = new Graph<string, int>;
+
+    Vertex<string, int> * A = new Vertex<string, int>("Redes internas");
+
+    redInterna->addVertex(A);
+    /*Iterar sobre el vector de datos*/
+    for (auto log : internalIPdata)
+    {   /*Añadir las fechas al set*/
+        dates.insert(log.getDate());
+    }
+
+    for (auto date : dates)
+    {   cout << date << endl;
+
+        /*Crear un nuevo vertice con la fecha*/
+        Vertex<string, int> * fecha = new Vertex<string, int>(date);
+        /*Añadir el vertice al grafo*/
+        redInterna->addVertex(fecha);
+        counter = 1;
+         
+        
+        while(counter > 0)
+        {
+            if(date == internalIPdata[i].getDate())
+            {   
+                counter++;
+                i++;
+                
+                if(i == internalIPdata.size())
+                {   counter --;
+                    redInterna->addEdge(A, fecha, counter);
+                    break;
+                }
+            }
+            else             
+            {
+                counter --;
+               redInterna->addEdge(A, fecha, counter);
+                break;
+            }
+            
+        }
+    }
+    
+    return redInterna;
     
 }
+
 int main()
 {   
     /*Vector principal de datos*/
@@ -116,5 +168,8 @@ int main()
     /*Vector de datos de sitios web*/
     vector<Register> websitesData = websites(registros);
 
+    Graph<string, int> * redInter = grafoRedInter(interalIPdata);
+
+    
 }
 
