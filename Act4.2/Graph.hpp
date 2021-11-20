@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
 #include <iterator>
 #include "Vertex.hpp"
 
@@ -29,7 +30,7 @@ public:
     void addVertex(Vertex<V,E> * );
     void addEdge(Vertex<V,E> *, Vertex<V,E> *, const E & );
     void removeEdge(Vertex<V,E> *, Vertex<V,E> *, const E & );
-    void BFS(int u);
+    void MoreConections();
 
     template <class Vn, class En>
     friend std::ostream & operator <<(std::ostream &, const Graph<Vn,En> &);
@@ -108,44 +109,27 @@ std::ostream & operator <<(std::ostream & os, const Graph<V,E> & graph)
     return os;
 }
 template <class V, class E>
-void Graph<V,E>::BFS(int u)
-{/*Crear una cola*/
-    std::queue<int> cola;
-
-    /*Crear un vector con los nodos visitados*/
-    std::vector<bool> visited(50);
-
-    /*Marcar el nodo actual como descubierto*/
-    visited[u] = true;
-
-    /*Aregar a la cola el nodo*/
-    cola.push(u);
-
-    /*Ciclo hasta que la cola esté vacia*/
-    while (!cola.empty())
-    {   
-        /*Impirmir y eliminar el primer elemento de la cola*/
-        std::cout << cola.front() << " ";
-        cola.pop();
-
-        std::vector<int>::iterator j;
-
-        /*Recorrer las demas aristas*/
-        while(nodes[u] !=  nullptr)
-        {
-            int v = 1;
-            if(visited[v])
-            {
-                visited[v] = true;
-                cola.push(v);
-                
-                v++;
-            }
-            u++;
-
-        }
+void Graph<V,E>::MoreConections()
+{   
+    int i = 0;
         
-    }
+    Vertex<V,E> * source = nodes[0];
+    auto node = find(nodes.begin(), nodes.end(), source);
+
+    Vertex<V,E> * vertex = (*node);
+
+    auto * edges = vertex->getEdges();
+
+    for (auto e : *edges)
+    {   i++;
+        auto infor = e->getInfo();
+
+        if(infor > 54)
+        {
+            std::cout << nodes[i]->getInfo() << std::endl;
+            std::cout << infor << std::endl;
+        } 
+    } 
 }
 
 #endif /* Graph_hpp */

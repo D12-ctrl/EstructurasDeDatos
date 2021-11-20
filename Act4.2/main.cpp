@@ -114,6 +114,7 @@ auto grafoRedInter(vector<Register> internalIPdata)
     Vertex<string, int> * A = new Vertex<string, int>("Redes internas");
 
     redInterna->addVertex(A);
+
     /*Iterar sobre el vector de datos*/
     for (auto log : internalIPdata)
     {   /*Añadir las fechas al set*/
@@ -121,15 +122,16 @@ auto grafoRedInter(vector<Register> internalIPdata)
     }
 
     for (auto date : dates)
-    {   cout << date << endl;
-
+    {   
         /*Crear un nuevo vertice con la fecha*/
+
         Vertex<string, int> * fecha = new Vertex<string, int>(date);
+
         /*Añadir el vertice al grafo*/
         redInterna->addVertex(fecha);
+
         counter = 1;
          
-        
         while(counter > 0)
         {
             if(date == internalIPdata[i].getDate())
@@ -140,6 +142,7 @@ auto grafoRedInter(vector<Register> internalIPdata)
                 if(i == internalIPdata.size())
                 {   counter --;
                     redInterna->addEdge(A, fecha, counter);
+                    cout << counter << endl;
                     break;
                 }
             }
@@ -170,6 +173,8 @@ int main()
 
     Graph<string, int> * redInter = grafoRedInter(interalIPdata);
 
+    cout << "-------Vertice con más conexiones hacia A-------" << endl;
+    redInter->MoreConections();
     
 }
 
