@@ -112,7 +112,7 @@ template <class V, class E>
 void Graph<V,E>::MoreConections()
 {   
     int i = 0;
-        
+
     Vertex<V,E> * source = nodes[0];
     auto node = find(nodes.begin(), nodes.end(), source);
 
@@ -120,16 +120,37 @@ void Graph<V,E>::MoreConections()
 
     auto * edges = vertex->getEdges();
 
-    for (auto e : *edges)
-    {   i++;
-        auto infor = e->getInfo();
+    std::vector<int> conexiones;
 
-        if(infor > 54)
-        {
-            std::cout << nodes[i]->getInfo() << std::endl;
-            std::cout << infor << std::endl;
-        } 
+    for (auto e : *edges)
+    {   
+        auto infor = e->getInfo();
+        conexiones.push_back(infor);
+  
     } 
+    
+    int cont = 0;
+    std::sort(conexiones.begin(), conexiones.end(), std::greater<int>());
+    
+    for(auto ed : *edges)
+    {
+        int i = 0; 
+        while(i == 0)
+        {
+            if(ed->getInfo() == conexiones[0])
+            {
+                std::cout << nodes[cont]->getInfo() << " " << conexiones[0] << std::endl;
+                break;
+            }
+            else
+            {
+                i = 1;
+                cont++;
+            }
+        }
+    }
+
+
 }
 
 #endif /* Graph_hpp */
