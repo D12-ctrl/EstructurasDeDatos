@@ -83,6 +83,26 @@ auto internalIP(vector<Register> registros)
     return logs;
 }
 
+auto conectionsTointernal(vector<Register> registros)
+{
+    vector<Register> logs;
+
+    for(auto element : registros)
+    {
+        if(element.getOriginIP() == "172.17.248.178") 
+        {
+            logs.push_back(element);
+        }
+    }
+
+    if(!logs.empty())
+    {
+        return logs;
+    } else {
+         cout << "No se encuentran datos" << endl;
+    }
+}
+
 auto websites(vector<Register> registros)
 {   
     /*Crear un vector donde se almacenan los sitios web*/
@@ -142,7 +162,6 @@ auto grafoRedInter(vector<Register> internalIPdata)
                 if(i == internalIPdata.size())
                 {   counter --;
                     redInterna->addEdge(A, fecha, counter);
-                    cout << counter << endl;
                     break;
                 }
             }
@@ -160,21 +179,155 @@ auto grafoRedInter(vector<Register> internalIPdata)
     
 }
 
+auto conectiosToB(vector<Register> websitesData)
+{   
+    /*Crear grafo para guardar las conexiones*/
+    Graph<string, int> * websites = new Graph<string, int>;
+
+    /*Vector para guardar sitios*/
+    vector<Register> sites;
+
+    /*Vertice principal*/
+    Vertex<string, int> * B = new Vertex<string, int>("Conexiones a B");
+
+    /*Añadir vertice*/
+    websites->addVertex(B);
+
+    for(auto site : websitesData)
+    {
+        
+        /*Guardar el sitio web*/
+        string name = site.getDestination();
+        
+        if(name.length() > 20)
+        {
+            sites.push_back(site);
+        }
+    }
+
+    
+    int cont = 0;
+        
+    Vertex<string, int> * date = new Vertex<string, int>(sites[1].getDate());
+
+    websites->addVertex(date);
+        
+    for(int i = 0; i < sites.size(); i++)
+    {
+        if(sites[1].getDate() == sites[i].getDate())
+        {
+            if(sites[1].getDestination() == sites[i].getDestination())
+            {
+                cont++;
+            }
+        }
+    }
+
+    cout << "Sitio web " << sites[1].getDestination() << endl;
+
+    websites->addEdge(B, date, cont);
+
+    return websites;
+}
+
+auto conectionsToC(vector<Register> websiteData)
+{
+    Graph<string, int> * conexionesC = new Graph<string, int>;
+
+    set<string> dates;
+    set<string> websites;
+
+    Vertex<string, int> * C = new Vertex<string, int>("Conexiones a C");
+    conexionesC->addVertex(C);
+
+    for(auto site : websiteData)
+    {
+        dates.insert(site.getDate());
+        websites.insert(site.getDestination());
+    }
+
+    vector<string> websits;
+
+    for(auto sites : websites)
+    {
+        websits.push_back(sites);
+    }
+    
+     int i = 0;
+    for(auto date : dates)
+    {
+       
+        int cont = 1;
+
+        Vertex<string, int> * fecha = new Vertex<string, int>(date);
+
+        conexionesC->addVertex(fecha);
+
+        while(cont != 0)
+        {
+            if(date == "10-8-2020")
+            {
+                if(i == websiteData.size())
+                {
+                    cont--;
+                    conexionesC->addEdge(C, fecha, cont);
+                    break;
+                }
+                if(websiteData[i].getDestination() == "gmail.com")
+                {
+                    cont++;
+                    
+                }
+               i++;
+            }
+            else
+            {
+                cont --;
+                if(cont <= 0)
+                {
+                    break;
+                }else { 
+                    conexionesC->addEdge(C, fecha, cont); 
+                    }
+                
+                
+            }
+        }   
+    }
+    cout << "gmail.com" << endl;
+    return conexionesC;
+}
+
 int main()
 {   
     /*Vector principal de datos*/
     vector<Register> registros = read_csv("equipo14.csv");
 
-    /*Vector de datos de la IP interna*/
+    cout << "-------Vertice de más conexiones de A-----------" << endl;
+    
+    /*Vector de conexiones de A por día*/
+    vector<Register> originIPdata = conectionsTointernal(registros); 
+
+    cout << "-------Vertice con más conexiones hacia A-------" << endl;
+    /*Vector de conexiones hacia A por dia*/
     vector<Register> interalIPdata = internalIP(registros);
+    /*Grafo de conexiones de IP interna*/
+    Graph<string, int> * redInter = grafoRedInter(interalIPdata);
+    redInter->MoreConections();
+
+    cout << "-------Conexiones por dia de B-------" << endl;
 
     /*Vector de datos de sitios web*/
     vector<Register> websitesData = websites(registros);
+    Graph<string, int> * weirdSites =  conectiosToB(websitesData);
+    weirdSites->MoreConections();
 
-    Graph<string, int> * redInter = grafoRedInter(interalIPdata);
 
-    cout << "-------Vertice con más conexiones hacia A-------" << endl;
-    redInter->MoreConections();
+    cout << "--------Más conexiones a C por dia-------" << endl;
+    Graph<string, int> * moreConections = conectionsToC(websitesData);
+    moreConections->MoreConections();
+
+    cout << "-------------------Preguntas-------------------" << endl;
     
 }
 
